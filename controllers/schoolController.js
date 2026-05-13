@@ -21,7 +21,7 @@ exports.addSchool = (req,res)=>{
 
     db.query(sql, [name, address, latitude, longitude], (error, results) => {
         if(error){
-            return res.status(500).json({error: 'Error adding school'});
+            return res.status(500).json({error: error.message});
         }
         res.status(201).json({message: 'School added successfully', school: {...req.body, id: results.insertId}});
     });
@@ -41,7 +41,7 @@ exports.listSchools = (req,res)=>{
 
     db.query(sql, (error, results) => {
         if(error){
-            return res.status(500).json({error: 'Error fetching schools'});
+            return res.status(500).json({error: error.message});
         }
 
         const sortedSchools = results.map((school)=>{
