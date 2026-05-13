@@ -1,0 +1,265 @@
+{
+  "info": {
+    "_postman_id": "676eb025-0cb6-454a-9f70-914e0db37870",
+    "name": "School Management Api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49667268",
+    "_collection_link": "https://go.postman.co/collection/49667268-676eb025-0cb6-454a-9f70-914e0db37870?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "add school",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\":\"Slate School\",\r\n    \"address\": \"Jagtial\",\r\n    \"latitude\": 18.8,\r\n    \"longitude\": 79.15\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://school-management-api-gl6s.onrender.com/schools",
+          "protocol": "https",
+          "host": [
+            "school-management-api-gl6s",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "schools"
+          ]
+        },
+        "description": "## Add School\n\nAdds a new school to the system.\n\n### Request Body\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `name` | string | The name of the school (e.g., \"Slate School\") |\n| `address` | string | The physical address or city of the school (e.g., \"Jagtial\") |\n| `latitude` | number | The geographic latitude coordinate of the school location |\n| `longitude` | number | The geographic longitude coordinate of the school location |\n\n### Response\n\nReturns a `201 Created` status on success with a confirmation message and the created school object, including its assigned `id`.\n\n**Example Response:**\n```json\n{\n  \"message\": \"School added successfully\",\n  \"school\": {\n    \"name\": \"Slate School\",\n    \"address\": \"Jagtial\",\n    \"latitude\": 18.8,\n    \"longitude\": 79.15,\n    \"id\": 3\n  }\n}\n```"
+      },
+      "response": [
+        {
+          "name": "add school",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Slate School\",\r\n    \"address\": \"Jagtial\",\r\n    \"latitude\": 18.8,\r\n    \"longitude\": 79.15\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://school-management-api-gl6s.onrender.com/schools",
+              "protocol": "https",
+              "host": [
+                "school-management-api-gl6s",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "schools"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 13 May 2026 11:39:57 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "104"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"85-bjFUeOb1brirnVboCvEVm879RNA\""
+            },
+            {
+              "key": "rndr-id",
+              "value": "e0033ef1-ced2-4592"
+            },
+            {
+              "key": "Server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "Render"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "CF-RAY",
+              "value": "9fb162b15c403965-MAA"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"message\": \"School added successfully\",\n    \"school\": {\n        \"name\": \"Slate School\",\n        \"address\": \"Jagtial\",\n        \"latitude\": 18.8,\n        \"longitude\": 79.15,\n        \"id\": 3\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "list schools",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://school-management-api-gl6s.onrender.com/schools?latitude=17.3850&longitude=78.4867",
+          "protocol": "https",
+          "host": [
+            "school-management-api-gl6s",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "schools"
+          ],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "17.3850"
+            },
+            {
+              "key": "longitude",
+              "value": "78.4867"
+            }
+          ]
+        },
+        "description": "## List Schools\n\nRetrieves a list of schools sorted by proximity to a given geographic location. Provide latitude and longitude coordinates as query parameters, and the API returns all schools along with their calculated distance from the specified point.\n\n---\n\n## Query Parameters\n\n| Parameter | Type | Required | Description |\n| --- | --- | --- | --- |\n| `latitude` | number | ✅ Yes | The latitude coordinate of the reference location (e.g. `17.3850`) |\n| `longitude` | number | ✅ Yes | The longitude coordinate of the reference location (e.g. `78.4867`) |\n\n---\n\n## Sample Response\n\n**Status:** `200 OK`\n\n``` json\n[\n  {\n    \"id\": 1,\n    \"name\": \"Indo American School\",\n    \"address\": \"hyderabad\",\n    \"latitude\": 17.4,\n    \"longitude\": 78.36,\n    \"distance\": \"13.55 km\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"ABC School\",\n    \"address\": \"Kamareddy\",\n    \"latitude\": 18.31,\n    \"longitude\": 79.15,\n    \"distance\": \"124.53 km\"\n  }\n]\n\n ```\n\n### Response Fields\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `id` | integer | Unique identifier of the school |\n| `name` | string | Name of the school |\n| `address` | string | Address or city where the school is located |\n| `latitude` | number | Latitude coordinate of the school |\n| `longitude` | number | Longitude coordinate of the school |\n| `distance` | string | Calculated distance from the provided coordinates to the school (e.g. `\"13.55 km\"`) |"
+      },
+      "response": [
+        {
+          "name": "list schools",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://school-management-api-gl6s.onrender.com/schools?latitude=17.3850&longitude=78.4867",
+              "protocol": "https",
+              "host": [
+                "school-management-api-gl6s",
+                "onrender",
+                "com"
+              ],
+              "path": [
+                "schools"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "17.3850"
+                },
+                {
+                  "key": "longitude",
+                  "value": "78.4867"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 13 May 2026 11:34:38 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "140"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Encoding",
+              "value": "br"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"e3-4ei4xiVOOWX/rUzOx4mVYzTgxlk\""
+            },
+            {
+              "key": "rndr-id",
+              "value": "284902c3-7509-4ae6"
+            },
+            {
+              "key": "Server",
+              "value": "cloudflare"
+            },
+            {
+              "key": "vary",
+              "value": "Accept-Encoding"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "x-render-origin-server",
+              "value": "Render"
+            },
+            {
+              "key": "cf-cache-status",
+              "value": "DYNAMIC"
+            },
+            {
+              "key": "CF-RAY",
+              "value": "9fb15ae5993d9f61-MAA"
+            },
+            {
+              "key": "alt-svc",
+              "value": "h3=\":443\"; ma=86400"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Indo American School\",\n        \"address\": \"hyderabad\",\n        \"latitude\": 17.4,\n        \"longitude\": 78.36,\n        \"distance\": \"13.55 km\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"ABC School\",\n        \"address\": \"Kamareddy\",\n        \"latitude\": 18.31,\n        \"longitude\": 79.15,\n        \"distance\": \"124.53 km\"\n    }\n]"
+        }
+      ]
+    }
+  ]
+}
